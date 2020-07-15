@@ -1,6 +1,3 @@
-# WordFrequencyCount
-Python Project for ORR
-
 Dear Ruben,
 
 Thanks for agreeing to look at this.  My main points are below, but any more general advice is welcome 
