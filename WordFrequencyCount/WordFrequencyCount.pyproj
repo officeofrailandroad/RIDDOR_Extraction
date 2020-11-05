@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>39f6eea5-2a93-49e6-aa8f-70543cc2bba5</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>word_search.py</StartupFile>
+    <StartupFile>RIDDOR_extraction.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -45,7 +45,7 @@
     <Compile Include="word_ingestion2.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="word_search.py">
+    <Compile Include="RIDDOR_extraction.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="xx_textcleaner_NamedTuple.py">

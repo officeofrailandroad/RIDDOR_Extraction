@@ -11,7 +11,7 @@ import pandas as pd
 
 def main():
 
-    wordlisted = getwords()
+    #wordlisted = getwords()
 
     plain_df = getDWdata()
 
@@ -27,14 +27,15 @@ def main():
     #do 'fuzzy matching on the station name' and return known or not known
     df_with_stn = replace_loc_with_stn(filtered_df,stnlist)
 
-    exportfile(df_with_stn,'output\\','RIDDOR_Data_2018_01')
+    exportfile(df_with_stn,'output\\','RIDDOR_Data_2020_10')
 
 
 def replace_loc_with_stn(data,stn):
     print("get alt location")
-    data['alt_location'] = data['location'].map(lambda x: process.extractOne(x,stn)[0])
+    
+    data['alt_location'] = data['location'].astype('str').map(lambda x: process.extractOne(x,stn)[0])
     print("get fit index")
-    data['fit_index'] = data['location'].map(lambda x: process.extractOne(x,stn)[1])
+    data['fit_index'] = data['location'].astype('str').map(lambda x: process.extractOne(x,stn)[1])
     print("return data")
 
     #data.apply(process.extractOne(data['location'],stn),axis=1,result_type='expand')
@@ -123,7 +124,7 @@ def getDWdata():
                 textual_data.c.injury_description,
                 textual_data.c.dangerous_occurrence,
                 textual_data.c.narrative]
-        ).distinct().where(textual_data.c.date_key >= '01/01/2018').where(textual_data.c.date_key <= '31/01/2018')
+        ).distinct().where(textual_data.c.date_key >= '01/10/2020').where(textual_data.c.date_key <= '31/10/2020')
     
     df = pd.read_sql_query(query,conn)
 
