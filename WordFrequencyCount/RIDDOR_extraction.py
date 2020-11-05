@@ -102,6 +102,7 @@ def getDWdata():
 
     textual_data = Table(
         'SMIS_Weekly_Report_new_and_non_reports_2018_DT',metadata,
+        Column('status_description',String,key='status_description'),
         Column('id_number',Integer,key= 'id_number'),
         Column('date_key',DateTime,key= 'date_key'),
         Column('location',String,key='location'),
@@ -116,6 +117,7 @@ def getDWdata():
 
     query = select(
                 [textual_data.c.id_number,
+                textual_data.c.status_description,
                 textual_data.c.date_key,
                 textual_data.c.location,
                 textual_data.c.organisation_name,
@@ -124,7 +126,7 @@ def getDWdata():
                 textual_data.c.injury_description,
                 textual_data.c.dangerous_occurrence,
                 textual_data.c.narrative]
-        ).distinct().where(textual_data.c.date_key >= '01/10/2020').where(textual_data.c.date_key <= '31/10/2020')
+        ).distinct().where(textual_data.c.status_description == 'published').where(textual_data.c.date_key >= '01/10/2020').where(textual_data.c.date_key <= '31/10/2020')
     
     df = pd.read_sql_query(query,conn)
 
