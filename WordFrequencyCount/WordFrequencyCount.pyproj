@@ -21,44 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="excelexporter.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="frequencycount.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="main.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="getsql.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="word_ingestion.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="plotdata.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="testbed.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="word_ingestion2.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RIDDOR_extraction.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="xx_textcleaner_NamedTuple.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="wordcount.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="xx_WordCount_NamedTuple.py" />
-    <Compile Include="textcleaner.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="word_documents\" />
