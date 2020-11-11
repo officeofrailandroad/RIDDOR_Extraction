@@ -13,21 +13,19 @@ def main():
 
     #wordlisted = getwords()
 
-    plain_df = getDWdata()
+    plain_df = getDWdata('01/10/2020','31/10/2020')
+    output_file_name = 'RIDDOR_Data_2020_10'
 
     filtered_df = plain_df
     #commented to run against full set
     #filtered_df = filternarratives(plain_df,wordlisted)
     
-    #provide a count of incidents
-    #provide a field with each of the narratives included
-
     stnlist = getSTNdata()
     
     #do 'fuzzy matching on the station name' and return known or not known
     df_with_stn = replace_loc_with_stn(filtered_df,stnlist)
 
-    exportfile(df_with_stn,'output\\','RIDDOR_Data_2020_10')
+    exportfile(df_with_stn,'output\\',output_file_name)
 
 
 def replace_loc_with_stn(data,stn):
@@ -92,7 +90,7 @@ def getSTNdata():
 
 
 
-def getDWdata():
+def getDWdata(start_date, end_date):
     print("setting connection")
     engine = create_engine('mssql+pyodbc://AZORRDWSC01/ORR_DW?driver=SQL+Server+Native+Client+11.0?trusted_connection=yes')
     conn = engine.connect()
@@ -126,7 +124,7 @@ def getDWdata():
                 textual_data.c.injury_description,
                 textual_data.c.dangerous_occurrence,
                 textual_data.c.narrative]
-        ).distinct().where(textual_data.c.status_description == 'published').where(textual_data.c.date_key >= '01/10/2020').where(textual_data.c.date_key <= '31/10/2020')
+        ).distinct().where(textual_data.c.status_description == 'published').where(textual_data.c.date_key >= start_date).where(textual_data.c.date_key <= end_date)
     
     df = pd.read_sql_query(query,conn)
 
