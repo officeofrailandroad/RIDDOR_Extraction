@@ -10,7 +10,13 @@ import pandas as pd
 
 
 def main():
+    """
+    Main entry point for code.  The functions which relate to word searches have been commented out
+    as they aren't needed anymore.
 
+    Parameters: None
+    Returns:    None, but exports a csv file with RIDDOR data
+    """
     #wordlisted = getwords()
 
     plain_df = getDWdata('01/11/2020','16/11/2020')
@@ -29,6 +35,15 @@ def main():
 
 
 def replace_loc_with_stn(data,stn):
+    """
+    This function performs a fuzzy look up against RIDDOR data, return a potential match against the
+    defined list of locations held in the warehouse.  Two columns are added. 'alt_location' holding 
+    the possible location and 'fit_index' indicating the degree of match
+
+    Parameters:
+    data:       A pandas dataframe holding RIDDOR data
+    stn:        A pandas dataframe holding stn_location data
+    """
     print("get alt location")
     
     data['alt_location'] = data['location'].astype('str').map(lambda x: process.extractOne(x,stn)[0])
@@ -49,6 +64,16 @@ def replace_loc_with_stn(data,stn):
 
 
 def getwords():
+    """
+    This procedures gets userinput for a list of works to search against.
+    Not used currently
+
+    Parameters:
+    userinput   User input from console screen
+
+    Returns:
+    words       A list of words
+    """
     words = []
     userinput = ''
     while userinput != 'exit':
@@ -59,6 +84,16 @@ def getwords():
 
 
 def getSTNdata():
+    """
+    This procedure use SQL Alchemy to extract station names from the Data warehouse and
+    converts that data into a pandas dataframe
+
+    Parameters:
+    None
+
+    Returns:
+    stn_list A list holding the complete names of stations
+    """
     print("setting stn connection")
     engine = create_engine('mssql+pyodbc://AZORRDWSC01/ORR_DW?driver=SQL+Server+Native+Client+11.0?trusted_connection=yes')
     conn = engine.connect()
@@ -91,6 +126,20 @@ def getSTNdata():
 
 
 def getDWdata(start_date, end_date):
+    """
+    This procedure uses SQL Alchemy to extract RIDDOR data from the view 'SMIS_Weekly_Report_new_and_non_reports_2018_DT'
+    and filters it by date range and publication_status
+
+    Parameters
+    start_date:  A string representing the earliest date inclusive range of the data needed,
+                 Format is 'DD/MM/YYYY'
+    end_data:    A string representing the latest inclusive date range of the data needed,
+                 Format is 'DD/MM/YYYY'
+
+    Returns
+    df:          A pandas dataframe holding the RIDDOR data
+    """
+
     print("setting connection")
     engine = create_engine('mssql+pyodbc://AZORRDWSC01/ORR_DW?driver=SQL+Server+Native+Client+11.0?trusted_connection=yes')
     conn = engine.connect()
@@ -134,6 +183,18 @@ def getDWdata(start_date, end_date):
 
 
 def filternarratives(df, key_words):
+    """
+    This procedure filters RIDDOR data on the 'narrative field' by a list of words.  Not currently used.
+
+    Parameters
+    df:             A pandas dataframe holding RIDDOR data
+    key_words:      A list holding words to filter the RIDDOR data by
+
+    Returns:
+    final_answer:   A list of lists holding the rows of RIDDOR data
+
+    """
+
     print("filtering text")
     
     colnames = ["id_number","date_key","location","organisation_name","route","orr_team","injury_description","dangerous_occurrence","narrative","search_word"]
