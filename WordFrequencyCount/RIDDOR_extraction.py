@@ -13,8 +13,8 @@ def main():
 
     #wordlisted = getwords()
 
-    plain_df = getDWdata('01/10/2020','31/10/2020')
-    output_file_name = 'RIDDOR_Data_2020_10'
+    plain_df = getDWdata('01/11/2020','16/11/2020')
+    output_file_name = 'RIDDOR_Data_2020_11_partial'
 
     filtered_df = plain_df
     #commented to run against full set
